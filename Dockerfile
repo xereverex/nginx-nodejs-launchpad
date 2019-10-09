@@ -18,25 +18,25 @@ COPY ./default.conf /etc/nginx/conf.d/default.conf
 
 WORKDIR /app
 
-ONBUILD ARG folder
+ARG folder
 
-ONBUILD ARG commit_hash
+ARG commit_hash
 
 ONBUILD COPY ./${folder}/package.json /app
 
 ONBUILD COPY ./shared-components /shared-components
 
-ONBUILD RUN npm install --unsafe-perm
+RUN npm install --unsafe-perm
 
 ONBUILD COPY ./${folder} /app
 
-ONBUILD RUN COMMIT_HASH=${commit_hash} npm run build
+RUN COMMIT_HASH=${commit_hash} npm run build
 
-ONBUILD RUN rm -rf node_modules
+RUN rm -rf node_modules
 
-ONBUILD RUN npm install
+RUN npm install
 
-ONBUILD RUN mv /app/public/* /usr/share/nginx/html
+RUN mv /app/public/* /usr/share/nginx/html
 
 EXPOSE 80
 ENTRYPOINT nginx; npm run server
