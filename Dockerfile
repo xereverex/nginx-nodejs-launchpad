@@ -13,30 +13,3 @@ RUN apt-get update \
  && rm -rf /var/lib/apt/lists/*
 
 COPY ./default.conf /etc/nginx/conf.d/default.conf
-
-# UPPER should be moved to base image
-
-WORKDIR /app
-
-ARG folder
-
-ARG commit_hash
-
-ONBUILD COPY ./${folder}/package.json /app
-
-ONBUILD COPY ./shared-components /shared-components
-
-RUN npm install --unsafe-perm
-
-ONBUILD COPY ./${folder} /app
-
-RUN COMMIT_HASH=${commit_hash} npm run build
-
-RUN rm -rf node_modules
-
-RUN npm install
-
-RUN mv /app/public/* /usr/share/nginx/html
-
-EXPOSE 80
-ENTRYPOINT nginx; npm run server
