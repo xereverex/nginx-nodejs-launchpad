@@ -8,7 +8,6 @@ RUN apt-get update \
     gcc \
     g++ \
     make \
-    nodejs-dev \ 
     node-gyp \
     libssl1.0-dev \
  && curl -sL https://deb.nodesource.com/setup_10.x | bash - \
