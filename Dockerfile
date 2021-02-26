@@ -8,6 +8,9 @@ RUN apt-get update \
     gcc \
     g++ \
     make \
+    nodejs-dev \ 
+    node-gyp \
+    libssl1.0-dev \
  && curl -sL https://deb.nodesource.com/setup_10.x | bash - \
  && apt-get install -y nodejs npm\
  && rm -rf /var/lib/apt/lists/*
