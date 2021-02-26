@@ -8,10 +8,8 @@ RUN apt-get update \
     gcc \
     g++ \
     make \
-    node-gyp \
-    libssl1.0-dev \
  && curl -sL https://deb.nodesource.com/setup_10.x | bash - \
- && apt-get install -y nodejs npm\
+ && apt-get install -y nodejs \
  && rm -rf /var/lib/apt/lists/*
 
 COPY ./default.conf /etc/nginx/conf.d/default.conf
